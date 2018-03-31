@@ -1,0 +1,15 @@
+app_color:
+    resource: "@AppBundle/Resources/config/routing/color.yml"
+    prefix:   /color
+
+app_restricciones:
+    resource: "@AppBundle/Resources/config/routing/restricciones.yml"
+    prefix:   /restricciones
+
+app_partida:
+    resource: "@AppBundle/Resources/config/routing/partida.yml"
+    prefix:   /partida
+
+app_jugada:
+    resource: "@AppBundle/Resources/config/routing/jugada.yml"
+    prefix:   /jugada

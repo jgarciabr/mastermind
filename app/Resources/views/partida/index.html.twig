@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Partidas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Code</th>
+                <th>State</th>
+                <th>Numsessions</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for partida in partidas %}
+            <tr>
+                <td><a href="{{ path('partida_show', { 'id': partida.id }) }}">{{ partida.id }}</a></td>
+                <td>{{ partida.name }}</td>
+                <td>{% if partida.date %}{{ partida.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ partida.code }}</td>
+                <td>{{ partida.state }}</td>
+                <td>{{ partida.numsessions }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('partida_show', { 'id': partida.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('partida_edit', { 'id': partida.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('partida_new') }}">Create a new partida</a>
+        </li>
+    </ul>
+{% endblock %}

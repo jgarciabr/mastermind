@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Restricciones</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ restricciones.id }}</td>
+            </tr>
+            <tr>
+                <th>Maxsessions</th>
+                <td>{{ restricciones.maxsessions }}</td>
+            </tr>
+            <tr>
+                <th>Numelements</th>
+                <td>{{ restricciones.numelements }}</td>
+            </tr>
+            <tr>
+                <th>Numcolors</th>
+                <td>{{ restricciones.numcolors }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('restricciones_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('restricciones_edit', { 'id': restricciones.id }) }}">Edit</a>
+        </li>
+        <!--
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+        -->
+    </ul>
+{% endblock %}

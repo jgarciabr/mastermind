@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Partida</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ partida.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ partida.name }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if partida.date %}{{ partida.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ partida.code }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ partida.state }}</td>
+            </tr>
+            <tr>
+                <th>Numsessions</th>
+                <td>{{ partida.numsessions }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('partida_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('partida_edit', { 'id': partida.id }) }}">Edit</a>
+        </li>
+        <li>
+            <a href="{{ path('jugada_new', { 'partida_id': partida.id }) }}">Nueva jugada</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

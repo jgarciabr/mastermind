@@ -1,0 +1,7 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+app_file:
+    # cargamos el routing de los AppBunde que pudiese haber en el src
+    resource: '@AppBundle/Resources/config/routing.yml'

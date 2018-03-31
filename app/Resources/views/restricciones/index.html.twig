@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Restricciones list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Maxsessions</th>
+                <th>Numelements</th>
+                <th>Numcolors</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for restricciones in restricciones %}
+            <tr>
+                <td><a href="{{ path('restricciones_show', { 'id': restricciones.id }) }}">{{ restricciones.id }}</a></td>
+                <td>{{ restricciones.maxsessions }}</td>
+                <td>{{ restricciones.numelements }}</td>
+                <td>{{ restricciones.numcolors }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('restricciones_show', { 'id': restricciones.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('restricciones_edit', { 'id': restricciones.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+    <!--
+        <li>
+            <a href="{{ path('restricciones_new') }}">Create a new restricciones</a>
+        </li>
+        -->
+    </ul>
+{% endblock %}

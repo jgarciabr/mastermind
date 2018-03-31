@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Jugadas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Num</th>
+                <th>Date</th>
+                <th>Code</th>
+                <th>Result</th>
+                <th>Partidaid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jugada in jugadas %}
+            <tr>
+                <td><a href="{{ path('jugada_show', { 'id': jugada.id }) }}">{{ jugada.id }}</a></td>
+                <td>{{ jugada.num }}</td>
+                <td>{% if jugada.date %}{{ jugada.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ jugada.code }}</td>
+                <td>{{ jugada.result }}</td>
+                <td>{{ jugada.partidaId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('jugada_show', { 'id': jugada.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('jugada_edit', { 'id': jugada.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('jugada_new') }}">Create a new jugada</a>
+        </li>
+    </ul>
+{% endblock %}

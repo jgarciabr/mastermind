@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Jugada</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ jugada.id }}</td>
+            </tr>
+            <tr>
+                <th>Num</th>
+                <td>{{ jugada.num }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if jugada.date %}{{ jugada.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ jugada.code }}</td>
+            </tr>
+            <tr>
+                <th>Result</th>
+                <td>{{ jugada.result }}</td>
+            </tr>
+            <tr>
+                <th>Partidaid</th>
+                <td>{{ jugada.partidaId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('jugada_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('jugada_edit', { 'id': jugada.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
