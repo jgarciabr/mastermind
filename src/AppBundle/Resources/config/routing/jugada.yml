@@ -13,6 +13,16 @@ jugada_new:
     defaults: { _controller: "AppBundle:Jugada:new" }
     methods:  [GET, POST]
 
+jugada_add:
+    path:     /add
+    defaults: { _controller: "AppBundle:Jugada:add" }
+    methods:  [POST]
+
+jugada_get:
+    path:     /getJugada
+    defaults: { _controller: "AppBundle:Jugada:getJugada" }
+    methods:  [GET]
+
 jugada_edit:
     path:     /{id}/edit
     defaults: { _controller: "AppBundle:Jugada:edit" }

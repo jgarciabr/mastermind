@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 class PartidaType extends AbstractType
 {
     /**
@@ -14,10 +13,8 @@ class PartidaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //El único dato que el usuario puede decidir es el nombre
         $builder->add('name');
-    }
-    /**
+    }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

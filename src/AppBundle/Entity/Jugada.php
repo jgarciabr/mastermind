@@ -15,7 +15,7 @@ class Jugada
 
     /**
      * @ORM\ManyToOne(targetEntity="Partida", inversedBy="jugadas")
-     * @ORM\JoinColumn(name="partida_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="partidaId", referencedColumnName="id")
      */
     private $partida;
 
@@ -38,16 +38,45 @@ class Jugada
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="datetime",nullable=true)
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=255)
+     * @ORM\Column(name="code1", type="string", length=255)
      */
-    private $code;
+    private $code1;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code2", type="string", length=255)
+     */
+    private $code2;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code3", type="string", length=255)
+     */
+    private $code3;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code4", type="string", length=255)
+     */
+    private $code4;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code5", type="string", length=255)
+     */
+    private $code5;    /**
+ * @var string
+ *
+ * @ORM\Column(name="code6", type="string", length=255)
+ */
+    private $code6;
 
     /**
      * @var string
@@ -59,7 +88,7 @@ class Jugada
     /**
      * @var int
      *
-     * @ORM\Column(name="partida_id", type="integer")
+     * @ORM\Column(name="partidaId", type="integer")
      */
     private $partidaId;
 
@@ -180,7 +209,6 @@ class Jugada
     public function setPartidaId($partidaId)
     {
         $this->partidaId = $partidaId;
-
         return $this;
     }
 
@@ -189,9 +217,180 @@ class Jugada
      *
      * @return int
      */
+
     public function getPartidaId()
     {
         return $this->partidaId;
     }
-}
 
+    /**
+     * Set survey
+     *
+     * @param \AppBundle\Entity\Partida $partida
+     *
+     * @return Choice
+     */
+
+    public function setPartida(\AppBundle\Entity\Partida $partida)
+    {
+        $this->partida = $partida;
+
+        return $this;
+    }
+
+    /**
+     * Get surveyId
+     *
+     * @return \AppBundle\Entity\Partida
+     */
+
+    public function getPartida()
+    {
+        return $this->partida;
+    }
+
+
+    /**
+     * Set code1
+     *
+     * @param string $code1
+     *
+     * @return Jugada
+     */
+    public function setCode1($code1)
+    {
+        $this->code1 = $code1;
+
+        return $this;
+    }
+
+    /**
+     * Get code1
+     *
+     * @return string
+     */
+    public function getCode1()
+    {
+        return $this->code1;
+    }
+
+    /**
+     * Set code2
+     *
+     * @param string $code2
+     *
+     * @return Jugada
+     */
+    public function setCode2($code2)
+    {
+        $this->code2 = $code2;
+
+        return $this;
+    }
+
+    /**
+     * Get code2
+     *
+     * @return string
+     */
+    public function getCode2()
+    {
+        return $this->code2;
+    }
+
+    /**
+     * Set code3
+     *
+     * @param string $code3
+     *
+     * @return Jugada
+     */
+    public function setCode3($code3)
+    {
+        $this->code3 = $code3;
+
+        return $this;
+    }
+
+    /**
+     * Get code3
+     *
+     * @return string
+     */
+    public function getCode3()
+    {
+        return $this->code3;
+    }
+
+    /**
+     * Set code4
+     *
+     * @param string $code4
+     *
+     * @return Jugada
+     */
+    public function setCode4($code4)
+    {
+        $this->code4 = $code4;
+
+        return $this;
+    }
+
+    /**
+     * Get code4
+     *
+     * @return string
+     */
+    public function getCode4()
+    {
+        return $this->code4;
+    }
+
+    /**
+     * Set code5
+     *
+     * @param string $code5
+     *
+     * @return Jugada
+     */
+    public function setCode5($code5)
+    {
+        $this->code5 = $code5;
+
+        return $this;
+    }
+
+    /**
+     * Get code5
+     *
+     * @return string
+     */
+    public function getCode5()
+    {
+        return $this->code5;
+    }
+
+    /**
+     * Set code6
+     *
+     * @param string $code6
+     *
+     * @return Jugada
+     */
+    public function setCode6($code6)
+    {
+        $this->code6 = $code6;
+
+        return $this;
+    }
+
+    /**
+     * Get code6
+     *
+     * @return string
+     */
+    public function getCode6()
+    {
+        return $this->code6;
+    }
+}

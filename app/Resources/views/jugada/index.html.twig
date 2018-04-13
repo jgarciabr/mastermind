@@ -21,9 +21,15 @@
                 <td><a href="{{ path('jugada_show', { 'id': jugada.id }) }}">{{ jugada.id }}</a></td>
                 <td>{{ jugada.num }}</td>
                 <td>{% if jugada.date %}{{ jugada.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ jugada.code }}</td>
+                <td>{{ jugada.code1 }}</td>
+                <td>{{ jugada.code2 }}</td>
+                <td>{{ jugada.code3 }}</td>
+                <td>{{ jugada.code4 }}</td>
+                <td>{{ jugada.code5 }}</td>
+                <td>{{ jugada.code6 }}</td>
+
                 <td>{{ jugada.result }}</td>
-                <td>{{ jugada.partidaId }}</td>
+                <td>{{ jugada.getPartida.name }}</td>
                 <td>
                     <ul>
                         <li>
@@ -39,9 +45,4 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('jugada_new') }}">Create a new jugada</a>
-        </li>
-    </ul>
 {% endblock %}

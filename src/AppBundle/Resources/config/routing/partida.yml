@@ -22,3 +22,13 @@ partida_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Partida:delete" }
     methods:  DELETE
+
+partida_get:
+    path:     /getPartida
+    defaults: { _controller: "AppBundle:Partida:getPartida" }
+    methods:  [GET]
+
+partida_add:
+    path:     /add
+    defaults: { _controller: "AppBundle:Partida:add" }
+    methods:  [POST]

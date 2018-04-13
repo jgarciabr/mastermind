@@ -13,7 +13,9 @@ class JugadaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('num')->add('date')->add('code')->add('result')->add('partidaId');
+        $builder->add('code1')->add('code2')->add('code3')->add('code4')->add('code5')->add('code6');
+
+
     }/**
      * {@inheritdoc}
      */

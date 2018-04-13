@@ -199,5 +199,13 @@ class Partida
     {
         return $this->numsessions;
     }
+
+    /**
+     * @return Partidas
+     */
+    public function getJugadas()
+    {
+        return $this->jugadas;
+    }
 }
 

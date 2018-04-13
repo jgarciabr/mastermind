@@ -9,7 +9,6 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Date</th>
-                <th>Code</th>
                 <th>State</th>
                 <th>Numsessions</th>
                 <th>Actions</th>
@@ -21,7 +20,6 @@
                 <td><a href="{{ path('partida_show', { 'id': partida.id }) }}">{{ partida.id }}</a></td>
                 <td>{{ partida.name }}</td>
                 <td>{% if partida.date %}{{ partida.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ partida.code }}</td>
                 <td>{{ partida.state }}</td>
                 <td>{{ partida.numsessions }}</td>
                 <td>
@@ -35,6 +33,46 @@
                     </ul>
                 </td>
             </tr>
+            {% if partida.jugadas|length > 0 %}
+                        <tr>
+                            <th>&nbsp;&nbsp;&nbsp;</th>
+                            <th>Id</th>
+                            <th>número</th>
+                            <th>jugada</th>
+                            <th>Resultado</th>
+                        </tr>
+                        {% for jugada in partida.jugadas %}
+                            <tr style="text-align:center">
+                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                <td>{{ jugada.id }}</td>
+                                <td>{{ jugada.num }}</td>
+                <td>{{ jugada.code1 }}</td>
+                <td>{{ jugada.code2 }}</td>
+                <td>{{ jugada.code3 }}</td>
+                <td>{{ jugada.code4 }}</td>
+                <td>{{ jugada.code5 }}</td>
+                <td>{{ jugada.code6 }}</td>
+                <td>{{ jugada.result }}</td>
+                            </tr>
+                        {% endfor %}
+
+
+           {% endif %}
+           <tr>
+            <td>______</td><td>______</td>
+            <td>
+                        {% if partida.numsessions <= 15 %}
+                           <ul>
+                               <li>
+                                   <a href="{{ path('jugada_new') }}?partidaid={{ partida.id }}">Create a new jugada</a>
+                               </li>
+                           </ul>
+                        {% endif %}
+
+             </td>
+            <td>______</td><td>______</td>
+
+
         {% endfor %}
         </tbody>
     </table>
