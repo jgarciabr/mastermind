@@ -91,8 +91,7 @@ class PartidaController extends Controller
         $partida = new Partida();
 
 
-
-            if($partida->getName()==""){
+        if($partida->getName()==""){
                 $partida->setName("partida".time());
             }
 
@@ -119,15 +118,25 @@ class PartidaController extends Controller
             $em->persist($partida);
             $em->flush();
 
-        $response = new Response(
-            'Su id es: "'.$partida->getId()
-            ."<br> El estado de la partida es:".$partida->getState()
-            ."<br> Jugadas restantes:".(15-$partida->getNumsessions())
-            ."<br> El código es:".($partida->getCode()),
 
-            Response::HTTP_OK,
-            array('content-type' => 'text/html')
-        );
+        if($partida->getId()>0) {
+            $response = new Response(json_encode(array(
+                'state' => $partida->getState(),
+                'numsessions' => (15 - $partida->getNumsessions()),
+                'code' => $partida->getCode()
+            )));
+            $response->setStatusCode(Response::HTTP_CREATED);
+            $response->headers->set('Content-Type', 'application/json');
+        }else {
+
+            // crea una respuesta JSON con código de estado 417
+            $response = new Response(json_encode(array(
+                'ERROR' => 'No se ha podido crear el registro',
+            )));
+            $response->setStatusCode(Response::HTTP_EXPECTATION_FAILED);
+            $response->headers->set('Content-Type', 'application/json');
+
+        }
         return $response;
     }
 
@@ -159,21 +168,19 @@ class PartidaController extends Controller
         $partida = $this->getDoctrine()
             ->getRepository(Partida::class)
             ->find($id);
-        $json = json_encode(array(
+
+
+        // crea una respuesta JSON con código de estado 200
+        $response = new Response(json_encode(array(
             'id' => $partida->getId(),
             'date' => $partida->getDate(),
             'code' => $partida->getCode(),
             'state' => $partida->getState(),
             'jugadas' => $partida->getNumsessions()
+        )));
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->headers->set('Content-Type', 'application/json');
 
-        ), JSON_FORCE_OBJECT);
-
-
-        $response = new Response(
-            $json,
-            Response::HTTP_OK,
-            array('content-type' => 'text/html')
-        );
         return $response;
     }
 

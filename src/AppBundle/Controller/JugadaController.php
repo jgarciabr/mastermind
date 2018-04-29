@@ -149,7 +149,7 @@ class JugadaController extends Controller
     /**
      * Creates a new jugada entity.
      *
-     * @Route("/new", name="jugada_new")
+     * @Route("/add", name="jugada_new")
      * @Method({"GET", "POST"})
      */
     public function addAction(Request $request)
@@ -159,6 +159,10 @@ class JugadaController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $id = $request->query->get('partidaid');
+        $code4 =  $request->query->get('code4');
+
+        echo $code4."__";
+
         //Recuperamos la partida
         $partida = $this->getDoctrine()
             ->getRepository(Partida::class)
@@ -167,7 +171,9 @@ class JugadaController extends Controller
         $codigo_correcto = $partida->getCode();
 
         $valores = explode(",",$codigo_correcto);
+print_r($valores);echo"odod";
 
+echo $valores[0]."--".$request->query->get('code1');die();
         $resultado = "";
         if($valores[0]==$jugada->getCode1()){
             $jugada->setCode1("Negra");
@@ -218,15 +224,41 @@ class JugadaController extends Controller
         if($partida->getNumsessions()>=15){
             $partida->setState("Partida finalizada con derrota");
             $jugada->setPartida($partida);
+            $partida->setNumsessions = $partida->getNumsessions()+1;
             $em->persist($jugada);
             $em->flush();
-            $response = new Response(
-                'Ha alcanzado el número máximo de jugadas',
-                Response::HTTP_OK,
-                array('content-type' => 'text/html')
-            );
+
+            $em->persist($partida);
+            $em->flush();
+
+            $response = new Response(json_encode(array(
+                "Error"=>"Ya ha realizado el máximo número de jugadas posibles en esta partida",
+                "state"=>$partida->getState()
+            )));
+            $response->setStatusCode(Response::HTTP_LOCKED);
+            $response->headers->set('Content-Type', 'application/json');
             return $response;
 
+
+
+            if($jugada->getId()>0) {
+                $response = new Response(json_encode(array(
+                    'state' => $partida->getState(),
+                    'numsessions' => (15 - $partida->getNumsessions()),
+                    'code' => $partida->getCode()
+                )));
+                $response->setStatusCode(Response::HTTP_CREATED);
+                $response->headers->set('Content-Type', 'application/json');
+            }else{
+                // crea una respuesta JSON con código de estado 417
+                $response = new Response(json_encode(array(
+                    'ERROR' => 'No se ha podido crear el registro',
+                )));
+                $response->setStatusCode(Response::HTTP_EXPECTATION_FAILED);
+                $response->headers->set('Content-Type', 'application/json');
+            }
+
+            return $response;
         }
 
 
@@ -238,13 +270,13 @@ class JugadaController extends Controller
         $em->persist($partida);
         $em->flush();
 
-        $response = new Response(
-            'Su resultado ha sido: "'.$jugada->getResult()
-            ."<br> El estado de la partida es:".$partida->getState()
-            ."<br> Jugadas restantes:".(15-$partida->getNumsessions()),
-            Response::HTTP_OK,
-            array('content-type' => 'text/html')
-        );
+        $response = new Response(json_encode(array(
+            "Result"=>$jugada->getResult(),
+            "state"=>$partida->getState(),
+            "Jugadas restantes"=>(15-$partida->getNumsessions())
+            )));
+        $response->setStatusCode(Response::HTTP_CREATED);
+        $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
 
@@ -269,7 +301,7 @@ class JugadaController extends Controller
         /**
          * Finds and displays a jugada entity.
          *
-         * @Route("/{id}", name="jugada_show")
+         * @Route("/{id}", name="getJugada")
          * @Method("GET")
          */
         public function getJugadaAction(Request $request)
