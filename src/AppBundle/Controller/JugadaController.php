@@ -161,8 +161,6 @@ class JugadaController extends Controller
         $id = $request->query->get('partidaid');
         $code4 =  $request->query->get('code4');
 
-        echo $code4."__";
-
         //Recuperamos la partida
         $partida = $this->getDoctrine()
             ->getRepository(Partida::class)
@@ -171,46 +169,43 @@ class JugadaController extends Controller
         $codigo_correcto = $partida->getCode();
 
         $valores = explode(",",$codigo_correcto);
-print_r($valores);echo"odod";
-
-echo $valores[0]."--".$request->query->get('code1');die();
         $resultado = "";
-        if($valores[0]==$jugada->getCode1()){
+        if($valores[0]==$request->query->get('code1')){
             $jugada->setCode1("Negra");
         }else{
             $jugada->setCode1("Blanca");
         }
         $resultado.=$jugada->getCode1();
 
-        if($valores[1]==$jugada->getCode2()){
+        if($valores[1]==$request->query->get('code2')){
             $jugada->setCode2("Negra");
         }else{
             $jugada->setCode2("Blanca");
         }
         $resultado.=$jugada->getCode2();
 
-        if($valores[2]==$jugada->getCode3()){
+        if($valores[2]==$request->query->get('code3')){
             $jugada->setCode3("Negra");
         }else{
             $jugada->setCode3("Blanca");
         }
         $resultado.=$jugada->getCode3();
 
-        if($valores[3]==$jugada->getCode4()){
+        if($valores[3]==$request->query->get('code4')){
             $jugada->setCode4("Negra");
         }else{
             $jugada->setCode4("Blanca");
         }
         $resultado.=$jugada->getCode4();
 
-        if($valores[4]==$jugada->getCode5()){
+        if($valores[4]==$request->query->get('code5')){
             $jugada->setCode5("Negra");
         }else{
             $jugada->setCode5("Blanca");
         }
         $resultado.=$jugada->getCode5();
 
-        if($valores[5]==$jugada->getCode6()){
+        if($valores[5]==$request->query->get('code6')){
             $jugada->setCode6("Negra");
         }else{
             $jugada->setCode6("Blanca");
