@@ -159,12 +159,20 @@ class JugadaController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $id = $request->query->get('partidaid');
-        $code4 =  $request->query->get('code4');
 
         //Recuperamos la partida
         $partida = $this->getDoctrine()
             ->getRepository(Partida::class)
             ->find($id);
+
+        if(!$partida){
+            $response = new Response(json_encode(array(
+                "Error"=>"No se ha encontrado la partida")));
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+
+        }
         //Comprobamos código introducido
         $codigo_correcto = $partida->getCode();
 
